@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EQUALIZER Playground</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1><span>EQUALIZER</span> Playground</h1>
+    </header>
+
+    <main class="layout">
+      <aside class="left-panel">
+        <section class="controls" aria-label="오디오 조절">
+          <div class="control-group">
+            <div class="control-heading"><label for="volume">Volume</label><output id="volumeValue">60%</output></div>
+            <input id="volume" class="range" type="range" min="0" max="100" value="60">
+          </div>
+          <div class="control-group">
+            <div class="control-heading"><label for="bass">Bass</label><output id="bassValue">0 dB</output></div>
+            <input id="bass" class="range" type="range" min="-12" max="12" value="0">
+          </div>
+          <div class="control-group">
+            <div class="control-heading"><label for="mid">Mid</label><output id="midValue">0 dB</output></div>
+            <input id="mid" class="range" type="range" min="-12" max="12" value="0">
+          </div>
+          <div class="control-group">
+            <div class="control-heading"><label for="treble">Treble</label><output id="trebleValue">0 dB</output></div>
+            <input id="treble" class="range" type="range" min="-12" max="12" value="0">
+          </div>
+        </section>
+
+        <section class="mini-player">
+          <img class="mini-cover" src="cover.png" alt="앨범 커버">
+          <div class="mini-info">
+            <div class="track-title" id="miniTitle">크게 울어라</div>
+            <div class="artist" id="miniArtist">로이킴</div>
+            <div class="progress-wrap">
+              <input id="progress" type="range" min="0" max="100" value="0" aria-label="재생 위치">
+              <div class="time-row"><span id="currentTime">0:00</span><span id="duration">0:00</span></div>
+            </div>
+            <div class="player-buttons">
+              <button id="backButton" aria-label="10초 뒤로">◀◀</button>
+              <button id="playButton" class="play-button" aria-label="재생">▶</button>
+              <button id="forwardButton" aria-label="10초 앞으로">▶▶</button>
+            </div>
+            <label class="load-button" for="audioFile">음원 변경</label>
+            <input id="audioFile" type="file" accept="audio/*" hidden>
+          </div>
+        </section>
+      </aside>
+
+      <section class="album-stage" aria-label="앨범 비주얼">
+        <div class="record-wrap" id="recordWrap"><img src="Record.png" alt="LP 레코드" class="record"></div>
+        <img src="cover.png" alt="로이킴 앨범 커버" class="main-cover">
+      </section>
+
+      <section class="lyrics-panel" aria-label="가사">
+        <div class="lyrics" id="lyrics">
+          <p>혹시 네가 힘들세라<br>내 품에 안아 보지만<br>참았던 눈물을 흘리는 네가<br>아프지 않기를 바랄 뿐이야</p>
+          <p>행여 네 맘 다칠세라<br>나 오늘도 노래하지만<br>꾹 눌러 감춰 둔 내 눈물도<br>갈 곳을 잃은 그런 날이야</p>
+          <p>크게 울어라 내 사랑아<br>크게 울어라 내 뒤에서<br>아랑곳하지 말고 내 안에 숨어서<br>더 크게 소리 내 울어 주라</p>
+          <p>워어어어 어어 어어<br>워어어어 어어 어어<br>워어어어 어어 어어<br>워어어어 어어 어어</p>
+          <p>포기하고 싶을세라<br>저 하늘에 소리쳐 보지만<br>돌아오지 않는 목소리에<br>길을 잃지 않길 바랄 뿐이야</p>
+          <p>크게 울어라 내 사랑아<br>크게 울어라 내 뒤에서<br>아랑곳하지 말고 내 안에 숨어서<br>더 크게 소리 내 울어 주라</p>
+          <p>네 슬픔 다 마를 때까지<br>네 앞에 내가 보일 때까지<br>쏟아내고 조금 달래지면<br>뒤에서 나도 꼭 안아 주라</p>
+          <p>걱정하지 마 내 사랑아<br>고갤 들어 봐 내 사랑아<br>지금 이 순간이 추억이 될 때까지<br>이렇게 내 앞에 있어 주라</p>
+          <p>워어어어 어어 어어<br>워어어어 어어 어어<br>워어어어 어어 어어<br>워어어어 어어 어어</p>
+        </div>
+      </section>
+    </main>
+    <audio id="audio" src="track.mp3" preload="metadata"></audio>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

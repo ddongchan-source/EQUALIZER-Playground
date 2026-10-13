@@ -1,0 +1,554 @@
+
+@font-face {
+    font-family: SamsungSharp;
+    src: url("samsungsharpsans.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: SamsungSharp;
+    src: url("samsungsharpsans-medium.otf") format("opentype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: SamsungSharp;
+    src: url("samsungsharpsans-bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #42f75d;
+    --text: #f3f3f3;
+    --line: rgba(0, 0, 0, 0.65);
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #020402;
+    color: var(--text);
+    font-family: SamsungSharp, Arial, sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+.app {
+    width: 100%;
+    height: 100vh;
+    min-height: 650px;
+    background-image: url("bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 제목 */
+
+.topbar {
+    height: 100px;
+    flex: 0 0 100px;
+    border-bottom: 1px solid var(--green);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topbar h1 {
+    font-size: 42px;
+    line-height: 1;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -1.8px;
+    color: #37c64e;
+}
+
+.topbar h1 span {
+    color: #050805;
+}
+
+/* 전체 레이아웃 */
+
+.layout {
+    height: calc(100% - 100px);
+    min-height: 0;
+
+    display: grid;
+    grid-template-columns: 24% 1fr 25%;
+}
+
+/* 왼쪽 패널 */
+
+.left-panel {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(0, 0, 0, 0.58);
+}
+
+/* 이퀄라이저 조절 영역 */
+
+.controls {
+    flex: 1;
+    min-height: 0;
+    padding: 52px 10.8% 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.control-group {
+    width: 100%;
+    min-width: 0;
+}
+
+.control-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 52px;
+
+    color: #050805;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.control-heading output {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.control-group:focus-within output,
+.control-group:hover output {
+    opacity: 0.8;
+}
+
+/* 볼륨 및 EQ 슬라이더 */
+
+.range {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 11px;
+    border-radius: 20px;
+
+    background: linear-gradient(
+        to right,
+        var(--green) 0%,
+        var(--green) 60%,
+        #000 60%,
+        #000 100%
+    );
+
+    outline: none;
+    cursor: pointer;
+    display: block;
+}
+
+.range::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+
+    background: #fff;
+    border: 0;
+    box-shadow: 0 0 1px #111;
+}
+
+.range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 0;
+}
+
+/* 하단 미니 플레이어 */
+
+.mini-player {
+    height: 160px;
+    flex: 0 0 160px;
+
+    background: rgba(0, 0, 0, 0.82);
+    border-top: 1px solid rgba(0, 0, 0, 0.6);
+
+    display: grid;
+    grid-template-columns: 37% 1fr;
+    gap: 17px;
+
+    padding: 7px 4.5% 7px 2.2%;
+    align-items: center;
+    min-width: 0;
+}
+
+.mini-cover {
+    width: 100%;
+    height: 100%;
+    max-height: 145px;
+    object-fit: cover;
+    display: block;
+}
+
+.mini-info {
+    min-width: 0;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+
+    height: 100%;
+}
+
+.track-title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.artist {
+    font-size: 13px;
+    line-height: 1.35;
+    margin-bottom: 11px;
+}
+
+/* 재생 진행 바 */
+
+.progress-wrap {
+    width: 100%;
+}
+
+#progress {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 100%;
+    height: 4px;
+
+    background: #bbb;
+    border-radius: 8px;
+    display: block;
+    cursor: pointer;
+    outline: none;
+}
+
+#progress::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+#progress::-moz-range-thumb {
+    width: 7px;
+    height: 7px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.time-row {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 9px;
+    opacity: 0.6;
+    height: 11px;
+    visibility: hidden;
+}
+
+/* 재생 버튼 */
+
+.player-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+.player-buttons button {
+    border: 0;
+    background: none;
+    color: #f4f4f4;
+    padding: 0;
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.player-buttons .play-button {
+    font-size: 20px;
+    width: 24px;
+}
+
+.load-button {
+    font-size: 10px;
+    opacity: 0.55;
+    margin-top: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.load-button:hover {
+    opacity: 1;
+}
+
+/* 중앙 앨범 비주얼 */
+
+.album-stage {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    overflow: hidden;
+}
+
+.record-wrap {
+    position: absolute;
+    width: min(48%, 430px);
+    aspect-ratio: 1;
+
+    top: 10.5%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.record {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    animation: spin 8s linear infinite;
+    animation-play-state: paused;
+}
+
+.record-wrap.playing .record {
+    animation-play-state: running;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.main-cover {
+    position: absolute;
+
+    width: min(47%, 424px);
+    aspect-ratio: 1;
+    object-fit: cover;
+
+    left: 50%;
+    top: 36.5%;
+    transform: translateX(-50%);
+
+    z-index: 2;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* 오른쪽 가사 영역 */
+
+.lyrics-panel {
+    min-width: 0;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(70, 255, 90, 0.3) transparent;
+
+    padding: 40px 10% 30px 4%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.lyrics {
+    width: 100%;
+    max-width: 310px;
+
+    text-align: center;
+    font-family: SamsungSharp, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.24;
+    color: #eee;
+    white-space: normal;
+}
+
+.lyrics p {
+    margin: 0 0 19px;
+}
+
+/* 중간 크기 화면 */
+
+@media (max-width: 1100px) {
+    .layout {
+        grid-template-columns: 25% 1fr 25%;
+    }
+
+    .controls {
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+
+    .control-heading {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .record-wrap {
+        width: min(55%, 370px);
+    }
+
+    .main-cover {
+        width: min(54%, 360px);
+    }
+
+    .lyrics-panel {
+        padding-left: 2%;
+        padding-right: 5%;
+    }
+
+    .lyrics {
+        font-size: 12px;
+    }
+
+    .mini-player {
+        gap: 9px;
+        grid-template-columns: 34% 1fr;
+    }
+
+    .track-title {
+        font-size: 12px;
+    }
+}
+
+/* 모바일 화면 */
+
+@media (max-width: 760px) {
+    body {
+        overflow: auto;
+    }
+
+    .app {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .topbar {
+        height: 76px;
+        flex-basis: 76px;
+    }
+
+    .topbar h1 {
+        font-size: 30px;
+    }
+
+    .layout {
+        height: auto;
+        display: grid;
+
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "stage"
+            "controls"
+            "lyrics";
+    }
+
+    .album-stage {
+        grid-area: stage;
+        height: 390px;
+    }
+
+    .record-wrap {
+        width: 245px;
+        top: 15px;
+    }
+
+    .main-cover {
+        width: 245px;
+        top: 125px;
+    }
+
+    .left-panel {
+        grid-area: controls;
+        border-right: 0;
+    }
+
+    .controls {
+        gap: 28px;
+        padding: 28px 8%;
+    }
+
+    .control-heading {
+        margin-bottom: 18px;
+    }
+
+    .mini-player {
+        height: 130px;
+        flex-basis: 130px;
+
+        grid-template-columns: 100px 1fr;
+        padding: 7px 8%;
+    }
+
+    .mini-cover {
+        max-height: 116px;
+    }
+
+    .lyrics-panel {
+        grid-area: lyrics;
+        max-height: 450px;
+        padding: 28px 10%;
+    }
+
+    .lyrics {
+        font-size: 13px;
+    }
+}
